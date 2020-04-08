@@ -3,8 +3,7 @@ provider "aws" {
 }
 
 module "route53-outbound" {
-  source            = "../"
-  #source            = "git::https://github.com/rhythmictech/terraform-aws-route53-endpoint"
+  source            = "../terraform-aws-route53-endpoint"
   allowed_resolvers = ["192.168.100.10/32", "192.168.100.11/32"]
   direction         = "outbound"
   security_group_ids = ["sg-014f95dea8e2267fa"]
@@ -22,8 +21,7 @@ module "route53-outbound" {
 
 
 module "route53-rule-ad-corp" {
-  source            = "../../terraform-aws-route53-resolver-rule"
-  #source            = "git::https://github.com/rhythmictech/terraform-aws-route53-resolver-rule?ref=v0.0.2"
+  source            = "../terraform-aws-route53-resolver-rule"
   associated_vpcs   = ["vpc-ba9e00c0"]
   forward_domain    = "ad.mycompany.com."
   forward_ips       = ["192.168.100.10", "192.168.100.11"]
